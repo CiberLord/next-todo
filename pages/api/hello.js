@@ -1,5 +1,17 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import fs from 'fs'
+import path from 'path'
 
 export default (req, res) => {
-  res.status(200).json({ name: 'John Doe' })
+  
+  let directory=path.join(process.cwd(),'db');
+  const fullpath=path.join(directory,'contacts.json');
+  
+  fs.readFile(fullpath,"utf8",(err,data)=>{
+    if(err){
+      console.log("error");
+      res.send('not found');
+    }else{
+      res.status(200).send(data);
+    }
+  })
 }
