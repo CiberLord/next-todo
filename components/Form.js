@@ -8,7 +8,9 @@ export default function Form(props){
 
     const onSubmit=(ev)=>{
         ev.preventDefault();
-        props.onSubmit(input.current.value);
+        let val=input.current.value;
+        if(val!=='')
+            props.onSubmit(input.current.value);
         input.current.value="";
     }
 
