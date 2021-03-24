@@ -10,7 +10,7 @@ const url = '/api/getuser';
 
 export default function Todo(props) {
     let [todo, setList] = useState([]); //список задач
-    let [showtype, setShow] = useState(""); //какой тип элементов отобразить (все/невыполенный)
+    let [showtype, setShow] = useState("all"); //какой тип элементов отобразить (все/невыполенный)
     let [blocking, setBlocking] = useState(false);
     const userId = getClientId(); //идентификатор клиента 
 
@@ -150,12 +150,12 @@ export default function Todo(props) {
     }
 
     return (
-        <div style={style.todo}>
+        <div className={style.todo}>
             <Form onSubmit={addTodo} />
             <ListView>
                 {Items}
             </ListView>
-            <Footer todo={todo} showUncompleted={showUncomp} showAll={showAll} />
+            <Footer todo={todo} showUncompleted={showUncomp} showAll={showAll} show={showtype}/>
         </div>
     )
 }

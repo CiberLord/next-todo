@@ -1,14 +1,18 @@
 import style from '../styles/utils.module.css';
 
 /* отоброжает один элемент */
-export default function Item(props){
+export default function Item(props) {
 
     return (
         <li className={style.item}>
-            <button  className={(props.isCompleted===true)?style.comp:style.uncomp} onClick={(ev)=>{props.onCompleted(props.id)}}>{(props.isCompleted===true)?"completed":"uncompleted"}</button>
-            <div className={style.itemContent}>{props.content}</div>
-            <div className={style.itemDate}>{props.date}</div>
-            <button className={style.removeItem} onClick={(ev)=>{props.onRemove(props.id)}}>remove</button>
+            <div className={style.itemLeft}>
+                <button className={style.completeButton + ' ' + ((props.isCompleted === true) ? style.complete : "")} onClick={(ev) => { props.onCompleted(props.id) }}></button>
+                <div className={style.itemContent+' ' + ((props.isCompleted === true) ? style.completeText : "")}>{props.content}</div>
+            </div>
+            <div className={style.itemRight}>
+                <div className={style.itemDate}>{props.date}</div>
+                <button className={style.deleteButton} onClick={(ev) => { props.onRemove(props.id) }}></button>
+            </div>
         </li>
     )
 }

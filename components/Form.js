@@ -14,7 +14,7 @@ export default function Form(props){
 
     return (
         <form className={style.form} onSubmit={onSubmit}>
-            <input ref={input}/>
+            <input ref={input} placeholder="what need to do"/>
             <button className={style.submitButton} onClick={onSubmit}>add</button>
         </form>
     )

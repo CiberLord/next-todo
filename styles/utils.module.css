@@ -1,3 +1,186 @@
+
+.todo{
+    max-width: 768px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 0px 19px 0px rgb(34 60 80 / 20%);
+}
+.form{
+    width: 100%;
+    display: flex;
+    border-bottom: 2px solid #d4d4d4;
+}
+.form>input{
+    width: 80%;
+    display: block;
+    height: 50px;
+    padding: 0 10px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    color: rgb(82, 82, 82);
+}
+
+.form>button{
+    width: 20%;
+    background-color: rgb(123, 141, 44);
+    font-size: 32px;
+    font-weight: 600;
+    color: #fff;
+}
 .item{
     display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    border-bottom: 1px solid #d4d4d4;
+    min-height: 50px;
+}
+.itemLeft{
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.itemRight{
+    text-align: center;
+    padding: 5px 10px;
+}
+.completeButton{
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px;
+    background-color: rgb(189, 189, 189);
+    transition-property: background-image;
+}
+.complete{
+    background-image: url(../public/complete.svg);
+}
+.completeText{
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.itemContent{
+    max-width: 420px;
+    word-wrap: break-word;
+    font-size: 18px;
+}
+.itemDate{
+    font-size: 13px;
+    font-weight: 600;
+    color: chocolate;
+}
+.deleteButton{
+    width: 25px;
+    height: 25px;
+    margin: 5px auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px;
+    transition-property: background-image;
+    background-image: url(../public/delete.svg);
+    background-color: transparent;
+    transform-origin: center;
+    transition-property: transform,opacity;
+    transition-duration: .2s;
+    opacity: 0;
+}
+.deleteButton:hover{
+    transform: rotateZ(45deg);
+    opacity: 1 !important;
+}
+.item:hover .deleteButton{
+    opacity: 0.5;
+}
+.footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 13px;
+    border-top: 2px solid #d4d4d4;
+    background-color: rgb(255, 254, 214);
+}
+.completeCount{
+    font-size: 17px;
+    color: rgb(170, 170, 170);
+}
+.doneNum{
+    color: rgb(55, 151, 207);
+    font-weight: 600;
+}
+.footerWrap{
+    display: flex;
+    align-items: center;
+}
+.footerBtn{
+    margin: 0 10px;
+    padding: 4px 13px;
+    border-radius: 4px;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(170, 170, 170);
+    border: 1px solid transparent;
+    transition: border .2s, background-color .2s;
+}
+.footerBtn:hover{
+    border: 1px solid rgb(107, 138, 107);
+}
+.selected{
+    background-color: rgb(107, 138, 107) !important;
+    border: 1px solid rgb(107, 138, 107) !important;
+    color: #fff !important;
+}
+
+
+@media(max-width: 763px){
+    .todo{
+        max-width: 100%;
+        border-radius: 0px;
+    }
+    .deleteButton{
+        opacity: 1 !important;
+    }
+}
+@media(max-width: 600px){
+    
+    .itemContent{
+        width: 60vw;
+        font-size: 15px;
+    }
+    .form>input{
+        font-size: 20px;
+    }
+    .form>button{
+        font-size: 20px;
+    }
+}
+@media(max-width: 420px){
+    
+    .itemContent{
+        font-size: 13px;
+    }
+    .form>input{
+        height: 40px;
+        font-size: 14px;
+    }
+    .form>button{
+        font-size: 14px;
+    }
+    .completeButton{
+        width: 20px;
+        height: 20px;
+        background-size: 14px;
+    }
+    .footerBtn{
+        font-size: 13px;
+    }
 }

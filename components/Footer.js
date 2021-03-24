@@ -6,13 +6,13 @@ export default function Footer(props) {
     for (let e of props.todo){
         if (e.completed === true) len++
     }
-
+    console.log(props.show);
     return (
         <div className={style.footer}>
-            <div className={style.completeCount}>{len}</div>
-            <div>
-                <button onClick={props.showUncompleted}>uncompleted</button>
-                <button onClick={props.showAll}>all</button>
+            <div className={style.completeCount}>done <span className={style.doneNum}>{len}</span></div>
+            <div className={style.footerWrap}>
+                <button className={style.footerBtn+' '+((props.show==="uncompleted")?style.selected:'')}  onClick={props.showUncompleted}>Not done</button>
+                <button className={style.footerBtn+' '+((props.show==="all")?style.selected:'')} onClick={props.showAll}>All</button>
             </div>
         </div>
     )

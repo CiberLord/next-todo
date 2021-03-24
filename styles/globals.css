@@ -1,14 +1,15 @@
+
 html,
 body {
+  background-color: rgb(235, 235, 235);
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
-
-h1{
-  font-size: 60px;
-  margin-left: 4px;
+*{
+  margin: 0;
+  padding: 0;
 }
 a{
   display: block;
@@ -17,4 +18,23 @@ ul,li{
   margin: 0;
   padding: 0;
   list-style: none;
+}
+section{
+  text-align: center;
+}
+.title{
+  font-size: 64px;
+  margin-bottom: 100px;
+}
+.title-1{
+  color: rgb(182, 212, 13);
+}
+.title-2{
+  color: rgb(56, 157, 197);
+}
+button{
+  display: block;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
