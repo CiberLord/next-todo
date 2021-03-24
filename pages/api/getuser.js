@@ -1,7 +1,10 @@
 import fs from 'fs'
 import path from 'path'
 
-const dbDir = path.join(process.cwd(), 'todo_db')
+const dbDir = path.join(process.cwd(), 'todo_db');
+if(fs.existsSync(dbDir)===false){
+    fs.mkdirSync(dbDir);
+}
 
 
 export default (request, response) => {
