@@ -6,7 +6,6 @@ export default function Footer(props) {
     for (let e of props.todo){
         if (e.completed === true) len++
     }
-    console.log(props.show);
     return (
         <div className={style.footer}>
             <div className={style.completeCount}>done <span className={style.doneNum}>{len}</span></div>
