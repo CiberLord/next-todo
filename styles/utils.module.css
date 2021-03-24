@@ -1,7 +1,3 @@
-.linkBlock{
-    font-size: 30px;
-    padding: 20px 30px;
-}
-.linkBlock>a{
-    margin: 5px 0;
+.item{
+    display: flex;
 }
