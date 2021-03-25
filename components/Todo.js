@@ -7,28 +7,42 @@ import Footer from './Footer';
 
 
 const url = '/api/getuser';
+const userKey='client';
 
 export default function Todo(props) {
     let [todo, setList] = useState([]); //список задач
     let [showtype, setShow] = useState("all"); //какой тип элементов отобразить (все/невыполенный)
-    let [blocking, setBlocking] = useState(false);
-    const userId = getClientId(); //идентификатор клиента 
-
+    let [blocking, setBlocking] = useState(false); //блокировка кнопок во время отправки запроса
+    let [userId,setUserId] = useState(-1); //айди клиента
+ 
     //загрузка начальных данных с сервера
     useEffect(() => {
-        let request = {
-            userid: userId,
-            action: "init" //тип действия который должен обработать сервер
+        if (typeof window !== 'undefined') {
+            
+            //получить айди из локальных данных
+            let id =localStorage.getItem(userKey);
+            if (id == null) {
+                //если не найдено то отпаравляется запрос на сервер с выдачей нового айди для нового клиента
+                let request = {
+                    action: "pswrd"
+                }
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(request)
+                }).then(res => res.json()).then(json => {
+                    localStorage.setItem(userKey, json.hash);
+                    setUserId(json.hash);
+                    startData(json.hash,setList);
+                })
+            } else {
+                //иначе происходит выдача данных пользователя
+                setUserId(parseInt(localStorage.getItem(userKey)));
+                startData(parseInt(localStorage.getItem(userKey)),setList);
+            }
         }
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(request)
-        }).then(res => res.json()).then(json => {
-            setList(getList(json));
-        })
     }, []);
 
 
@@ -155,14 +169,25 @@ export default function Todo(props) {
             <ListView>
                 {Items}
             </ListView>
-            <Footer todo={todo} showUncompleted={showUncomp} showAll={showAll} show={showtype}/>
+            <Footer todo={todo} showUncompleted={showUncomp} showAll={showAll} show={showtype} />
         </div>
     )
 }
-
-// получает локальный айди клиента, если нет, то сооздает новый айди и отправляет на сервер (еще не реализовано)
-function getClientId() {
-    return 1;
+//загрузка начальных данных клиента
+function startData(userId,clb){
+    let request = {
+        userid: userId,
+        action: "init" //тип действия который должен обработать сервер
+    }
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(request)
+    }).then(res => res.json()).then(json => {
+        clb(getList(json));
+    })
 }
 //получить список элементов по json ответу
 function getList(json) {

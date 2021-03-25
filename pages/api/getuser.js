@@ -8,16 +8,27 @@ if(fs.existsSync(dbDir)===false){
 
 
 export default (request, response) => {
-    console.log(response);
+    
     if (request.method === 'POST') {
 
         const fullpath = path.join(process.cwd(), 'todo_db/' + request.body.userid + '.json');
         switch (request.body.action) {
+            case "pswrd":{
+                let usersid=getAllUsersId();
+                console.log(usersid);
+                let result = 0;
+                for(let i of usersid)
+                    result+=i;
+                console.log("sum = "+result);
+                result=result%(usersid.length+1)+usersid.length;
+                console.log(result);
+                response.status(200).json({hash:result});
+                break;
+            }
             case "init": {
                 let usersid=getAllUsersId();
-                if(usersid.indexOf(request.body.userid)==-1){
+                if(usersid.indexOf(request.body.userid)<0){
                     fs.writeFileSync(fullpath,"{}");
-                    console.log("user create");
                 }
                 sendFile(fullpath,response);
                 break;
@@ -100,6 +111,7 @@ export default (request, response) => {
     }
 
 }
+//получить список идентификаторов всех пользователей
 function getAllUsersId(){
     
     //get file names
@@ -107,6 +119,7 @@ function getAllUsersId(){
 
     return filenames.map(filename=>parseInt(filename.replace(/\.json$/,'')))
 }
+//отправить файл с данными пользователя
 function sendFile(filename,response){
     fs.readFile(filename, 'utf8', (error, data) => {
         if (error) {
