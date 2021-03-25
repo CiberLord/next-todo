@@ -66,6 +66,7 @@ export default function Todo(props) {
                 body: JSON.stringify(request)
             }).then(res => res.json()).then(json => {
                 let list = [...todo];
+                console.log("added");
                 list.push({
                     id: json.id,
                     task: value,
